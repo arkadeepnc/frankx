@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from frankx import Affine, PathMotion, Robot
+from frankx import Affine, PathMotion, Robot, RealtimeConfig
 
 
 if __name__ == '__main__':
@@ -9,7 +9,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Connect to the robot
-    robot = Robot(args.host)
+    robot = Robot(args.host, realtime_config=RealtimeConfig.Ignore)
     robot.set_default_behavior()
     robot.recover_from_errors()
 

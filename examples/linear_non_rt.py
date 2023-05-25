@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from frankx import Affine, LinearRelativeMotion, Robot, RealtimeConfig
+import numpy as np
 
 
 if __name__ == '__main__':
@@ -14,13 +15,14 @@ if __name__ == '__main__':
     robot.recover_from_errors()
 
     # Reduce the acceleration and velocity dynamic
-    robot.set_dynamic_rel(0.15)
+    # robot.set_dynamic_rel(0.05)
+    robot.velocity_rel = 0.01
 
     # Define and move forwards
-    way = Affine(0.0, 0.2, 0.0)
+    way = Affine(0.1, 0.0, 0.0, 0, 0, 0)
     motion_forward = LinearRelativeMotion(way)
     robot.move(motion_forward)
 
     # And move backwards using the inverse motion
-    motion_backward = LinearRelativeMotion(way.inverse())
-    robot.move(motion_backward)
+    # motion_backward = LinearRelativeMotion(way.inverse())
+    # robot.move(motion_backward)

@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from frankx import Affine, JointMotion, LinearMotion, Robot
+from frankx import Affine, JointMotion, LinearMotion, Robot, RealtimeConfig
 
 
 if __name__ == '__main__':
@@ -9,16 +9,18 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Connect to the robot
-    robot = Robot(args.host)
+    # robot = Robot(args.host)
+    robot = Robot(args.host, realtime_config=RealtimeConfig.Ignore)
+
     robot.set_default_behavior()
     robot.recover_from_errors()
-    robot.set_dynamic_rel(0.15)
+    robot.set_dynamic_rel(0.5)
 
     # Joint motion
     robot.move(JointMotion([-1.811944, 1.179108, 1.757100, -2.14162, -1.143369, 1.633046, -0.432171]))
 
-    # Define and move forwards
-    camera_frame = Affine(y=0.05)
-    home_pose = Affine(0.480, 0.0, 0.40)
+    # # Define and move forwards
+    # camera_frame = Affine(y=0.05)
+    # home_pose = Affine(0.480, 0.0, 0.40)
 
-    robot.move(camera_frame, LinearMotion(home_pose, 1.75))
+    # robot.move(camera_frame, LinearMotion(home_pose, 1.75))

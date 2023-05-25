@@ -19,3 +19,4 @@ if __name__ == '__main__':
         print('Joints: ', state.q)
         print('Elbow: ', state.elbow)
         sleep(0.05)
+        exit()

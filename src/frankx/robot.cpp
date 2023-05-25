@@ -24,14 +24,23 @@ void Robot::setDefaultBehavior() {
 
     // libfranka 0.8 split F_T_EE into F_T_NE (set in desk to value below) and NE_T_EE which defaults to identity
     // set it anyway again.
-//    setEE({1, 0, 0, 0,
-//           0, 1, 0, 0,
-//           0, 0, 1, 0,
-//           0, 0, 0, 1});
-        setEE({1, 0, 0, 0,
-           0, -1, 0, 0,
-           0, 0, -1, 0,
-           0, 0, 0, 1});
+    // default from Franka
+   setEE({1, 0, 0, 0,
+          0, 1, 0, 0,
+          0, 0, 1, 0,
+          0, 0, 0, 1});
+// flip Y and Z
+        // setEE({1, 0, 0, 0,
+        //    0, -1, 0, 0,
+        //    0, 0, -1, 0,
+        //    0, 0, 0, 1});
+// Franka robot has the mount rotated by 45 degrees (to match the ISO 6 mount convention)
+// flip y and z then rotate 45 degrees about Z
+// setEE({0.7071068,  -0.7071068,  0.0000000, 0.,
+//   -0.7071068,  -0.7071068,  0.0000000, 0., 
+//    0.0000000,  0.0000000,  -1.0000000, 0.,
+//    0.,0.,0.,1.0});
+
 }
 
 void Robot::setDynamicRel(double dynamic_rel) {
